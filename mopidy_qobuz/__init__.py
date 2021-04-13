@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import os
 from mopidy import config, ext
+from retry import retry
 
 
 __version__ = '0.0.1'
@@ -25,6 +26,7 @@ class Extension(ext.Extension):
 
         return schema
 
+    @retry(backoff=2, tries=5)
     def setup(self, registry):
         from mopidy_qobuz.backend import QobuzBackend
 

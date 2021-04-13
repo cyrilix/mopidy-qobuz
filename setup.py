@@ -28,6 +28,7 @@ setup(
         'Pykka >= 1.1',
         'qobuz >= 0.0.1',
         'setuptools',
+        'retry',
     ],
     entry_points={
         'mopidy.ext': [
