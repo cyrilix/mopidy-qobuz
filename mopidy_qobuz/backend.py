@@ -8,7 +8,7 @@ import pykka
 import qobuz
 from itertools import cycle
 from mopidy import backend, httpclient
-from mopidy_qobuz import library, playback, playlists
+from mopidy_qobuz import library, playback
 
 
 logger = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ class QobuzBackend(pykka.ThreadingActor, backend.Backend):
         self.playback = playback.QobuzPlaybackProvider(
             audio=audio, backend=self
         )
-        self.playlists = playlists.QobuzPlaylistsProvider(backend=self)
+        self.playlists = None
         self.uri_schemes = ["qobuz"]
 
     def on_start(self):
