@@ -8,6 +8,8 @@ import pykka
 import qobuz
 from itertools import cycle
 from mopidy import backend, httpclient
+from retry import retry
+
 from mopidy_qobuz import library, playback
 
 
@@ -28,6 +30,7 @@ class QobuzBackend(pykka.ThreadingActor, backend.Backend):
         self.playlists = None
         self.uri_schemes = ["qobuz"]
 
+    @retry()
     def on_start(self):
         self._actor_proxy = self.actor_ref.proxy()
 
