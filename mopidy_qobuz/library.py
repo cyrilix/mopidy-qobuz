@@ -57,6 +57,7 @@ class QobuzLibraryProvider(backend.LibraryProvider):
 
     @lru_cache(maxsize=2048)
     def lookup(self, uri):
+        logger.info("lookup uri %s", uri)
         parts = uri.split(":")
 
         if uri.startswith("qobuz:artist"):

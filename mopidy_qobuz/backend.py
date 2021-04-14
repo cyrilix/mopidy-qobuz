@@ -30,8 +30,9 @@ class QobuzBackend(pykka.ThreadingActor, backend.Backend):
         self.playlists = None
         self.uri_schemes = ["qobuz"]
 
-    @retry()
+    @retry(logger=logger)
     def on_start(self):
+        logger.info("start quobuz extension")
         self._actor_proxy = self.actor_ref.proxy()
 
         # Kodi
@@ -45,6 +46,8 @@ class QobuzBackend(pykka.ThreadingActor, backend.Backend):
             self._config["qobuz"]["username"],
             self._config["qobuz"]["password"],
         )
+
+        logger.info("qobuz session initialized")
 
     def get_s4(self, app_id, s3b):
         """Return the obfuscated secret.
