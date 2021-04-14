@@ -30,7 +30,7 @@ class QobuzBackend(pykka.ThreadingActor, backend.Backend):
         self.playlists = None
         self.uri_schemes = ["qobuz"]
 
-    @retry(logger=logger)
+    @retry(logger=logger, max_delay=10)
     def on_start(self):
         logger.info("start quobuz extension")
         self._actor_proxy = self.actor_ref.proxy()
